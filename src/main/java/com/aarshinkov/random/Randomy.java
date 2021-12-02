@@ -4,7 +4,7 @@ import java.security.SecureRandom;
 
 /**
  * Class for generating random strings with specified length.
- * <br/><br/>
+ * <br></br><br></br>
  * Also checks if a specified string sequence consist only of lowercase or uppercase letters and if it contains only letters or letters and digits.
  *
  * @author Atanas Yordanov Arshinkov
