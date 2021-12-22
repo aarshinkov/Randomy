@@ -3,7 +3,7 @@ orbs:
   codecov: codecov/codecov@3.2.2
 
 jobs:
-  build-and-test:
+  project-build:
     docker:
       - image: cimg/openjdk:11.0
     steps:
