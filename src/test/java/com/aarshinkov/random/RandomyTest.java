@@ -268,4 +268,161 @@ public class RandomyTest {
     final boolean result = randomy.hasOnlyUppercase("EGNeI%$*KF");
     assertThat(result).isFalse();
   }
+
+  // From v1.2.0
+  @DisplayName("Generate number between 0 and 1 inclusive")
+  @RepeatedTest(10)
+  @Test
+  void generateRandomNumberBetweenZeroAndOneInclusive() {
+
+    Integer start = 0;
+    Integer end = 1;
+
+    Integer result = randomy.generateRandomNumber(start, end);
+    assertThat(result).isNotNull();
+    assertThat(result).isGreaterThanOrEqualTo(start);
+    assertThat(result).isLessThanOrEqualTo(end);
+  }
+
+  @DisplayName("Generate number between numbers inclusive")
+  @RepeatedTest(10)
+  @Test
+  void generateRandomNumberBetweenNumbersInclusive() {
+    Integer start = 0;
+    Integer end = 20;
+
+    Integer result = randomy.generateRandomNumber(start, end);
+    assertThat(result).isNotNull();
+    assertThat(result).isGreaterThanOrEqualTo(start);
+    assertThat(result).isLessThanOrEqualTo(end);
+
+    start = 60;
+    end = 99;
+
+    result = randomy.generateRandomNumber(start, end);
+    assertThat(result).isNotNull();
+    assertThat(result).isGreaterThanOrEqualTo(start);
+    assertThat(result).isLessThanOrEqualTo(end);
+
+    start = 563;
+    end = 1050;
+
+    result = randomy.generateRandomNumber(start, end);
+    assertThat(result).isNotNull();
+    assertThat(result).isGreaterThanOrEqualTo(start);
+    assertThat(result).isLessThanOrEqualTo(end);
+  }
+
+  @DisplayName("Generate number, parameters null, throw illegal argument exception")
+  @Test
+  void generateRandomNumberParametersNull() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(null, null);
+    });
+  }
+
+  @DisplayName("Generate number, end parameter null, throw illegal argument exception")
+  @Test
+  void generateRandomNumberOneParameterNull() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(1, null);
+    });
+  }
+
+  @DisplayName("Generate number, start parameter null, throw illegal argument exception")
+  @Test
+  void generateRandomNumberEndParameterNull() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(null, 20);
+    });
+  }
+
+  @DisplayName("Generate number, start parameter greater than end number, throw illegal argument exception")
+  @Test
+  void generateRandomNumberStartParameterGreaterThanEndNumber() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(25, 20);
+    });
+  }
+
+  @DisplayName("Generate number, start parameter greater than end number with one, throw illegal argument exception")
+  @Test
+  void generateRandomNumberStartParameterGreaterThanEndNumberDiffOne() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(21, 20);
+    });
+  }
+
+  // Generate number end exclusive
+
+  @DisplayName("Generate number, end exclusive")
+  @RepeatedTest(20)
+  @Test
+  void generateRandomNumbersEndExclusive() {
+    Integer start = 0;
+    Integer end = 20;
+
+    Integer result = randomy.generateRandomNumber(start, end, false);
+    assertThat(result).isNotNull();
+    assertThat(result).isGreaterThanOrEqualTo(start);
+    assertThat(result).isLessThan(end);
+
+    start = 65;
+    end = 87;
+
+    result = randomy.generateRandomNumber(start, end, false);
+    assertThat(result).isNotNull();
+    assertThat(result).isGreaterThanOrEqualTo(start);
+    assertThat(result).isLessThan(end);
+  }
+
+  @DisplayName("Generate number, parameters null, throw illegal argument exception, end exclusive")
+  @Test
+  void generateRandomNumberParametersNullEndExclusive() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(null, null, false);
+    });
+  }
+
+  @DisplayName("Generate number, end parameter null, throw illegal argument exception, end exclusive")
+  @Test
+  void generateRandomNumberOneParameterNullEndExclusive() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(1, null, false);
+    });
+  }
+
+  @DisplayName("Generate number, start parameter null, throw illegal argument exception, end exclusive")
+  @Test
+  void generateRandomNumberEndParameterNullEndExclusive() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(null, 20, false);
+    });
+  }
+
+  @DisplayName("Generate number, start parameter greater than end number, throw illegal argument exception, end exclusive")
+  @Test
+  void generateRandomNumberStartParameterGreaterThanEndNumberEndExclusive() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(25, 20, false);
+    });
+  }
+
+  @DisplayName("Generate number, start parameter greater than end number with one, throw illegal argument exception, end exclusive")
+  @Test
+  void generateRandomNumberStartParameterGreaterThanEndNumberDiffOneEndExclusive() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(21, 20, false);
+    });
+  }
 }

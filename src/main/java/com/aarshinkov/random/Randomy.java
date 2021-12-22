@@ -1,6 +1,7 @@
 package com.aarshinkov.random;
 
 import java.security.SecureRandom;
+import java.util.Random;
 
 /**
  * Class for generating random strings with specified length.
@@ -187,6 +188,37 @@ public class Randomy {
   public boolean hasOnlyUppercase(String sequence) {
     return hasOnlyOneCase(sequence, true);
   }
+
+  /**
+   * Generates a random number between the start and end parameter. The selection is inclusive - the result could be either of that numbers.
+   *
+   * @param start the start number, the result must not be lower than that
+   * @param end   the end number, the result must not be greater than that
+   *
+   * @return the generated whole number
+   */
+  public Integer generateRandomNumber(Integer start, Integer end) {
+    return generateRandomNumber(start, end, true);
+  }
+
+  public Integer generateRandomNumber(Integer start, Integer end, Boolean isInclusive) {
+
+    if (start == null || end == null) {
+      throw new IllegalArgumentException("Start or end number must not be null");
+    }
+
+    if (start > end) {
+      throw new IllegalArgumentException("The start number must be smaller than end number");
+    }
+
+    if (isInclusive) {
+      return RANDOM.nextInt((end - start) + 1) + start;
+    } else {
+      return RANDOM.nextInt((end - start)) + start;
+    }
+  }
+
+  // Private methods
 
   /**
    * @param sequence    the sequence to be checked
