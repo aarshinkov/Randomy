@@ -59,6 +59,16 @@ public class RandomyTest {
   @DisplayName("Generate random string with negative length and added digits")
   @RepeatedTest(5)
   @Test
+  void generateRandomStringLengthNegativeAndDigits() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomString(-2, true);
+    });
+  }
+
+  @DisplayName("Generate random string with zero length and added digits")
+  @RepeatedTest(5)
+  @Test
   void generateRandomStringLengthZeroAndDigits() {
 
     final String result = randomy.generateRandomString(0, true);
@@ -97,6 +107,16 @@ public class RandomyTest {
     assertThat(randomy.hasDigitInString(result)).isTrue();
     assertThat(result).isNotNull();
     assertThat(result).hasSize(2);
+  }
+
+  @DisplayName("Generate random string with length negative")
+  @RepeatedTest(5)
+  @Test
+  void generateRandomStringLengthNegativeOverloaded() {
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomString(-3, true, false, true);
+    });
   }
 
   @DisplayName("Has digit in string when string is NULL")
@@ -149,6 +169,27 @@ public class RandomyTest {
 
   //----------------------------------------------------
 
+  @DisplayName("Has only lowercase letters, sequence null")
+  @Test
+  void hasOnlyLowercaseLettersSequenceNull() {
+    final boolean result = randomy.hasOnlyLowercase(null);
+    assertThat(result).isFalse();
+  }
+
+  @DisplayName("Has only lowercase letters, sequence empty")
+  @Test
+  void hasOnlyLowercaseLettersSequenceEmpty() {
+    final boolean result = randomy.hasOnlyLowercase("");
+    assertThat(result).isFalse();
+  }
+
+  @DisplayName("Has only lowercase letters, sequence only spaces")
+  @Test
+  void hasOnlyLowercaseLettersSequenceOnlySpaces() {
+    final boolean result = randomy.hasOnlyLowercase("    ");
+    assertThat(result).isFalse();
+  }
+
   @DisplayName("Has only lowercase letters, all lowercase")
   @Test
   void hasOnlyLowercaseLettersAllLower() {
@@ -178,6 +219,27 @@ public class RandomyTest {
   }
 
   //----------------------------------------------------
+
+  @DisplayName("Has only uppercase letters, sequence null")
+  @Test
+  void hasOnlyUppercaseLettersSequenceNull() {
+    final boolean result = randomy.hasOnlyUppercase(null);
+    assertThat(result).isFalse();
+  }
+
+  @DisplayName("Has only uppercase letters, sequence empty")
+  @Test
+  void hasOnlyUppercaseLettersSequenceEmpty() {
+    final boolean result = randomy.hasOnlyUppercase("");
+    assertThat(result).isFalse();
+  }
+
+  @DisplayName("Has only uppercase letters, sequence only spaces")
+  @Test
+  void hasOnlyUppercaseLettersSequenceOnlySpaces() {
+    final boolean result = randomy.hasOnlyUppercase("    ");
+    assertThat(result).isFalse();
+  }
 
   @DisplayName("Has only uppercase letters, all uppercase")
   @Test
