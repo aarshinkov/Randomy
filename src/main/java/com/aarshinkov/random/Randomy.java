@@ -6,7 +6,8 @@ import java.util.Random;
 /**
  * Class for generating random strings with specified length.
  * <br><br>
- * Also checks if a specified string sequence consist only of lowercase or uppercase letters and if it contains only letters or letters and digits.
+ * Also checks if a specified string sequence consist only of lowercase or uppercase letters and if it contains only
+ * letters or letters and digits.
  *
  * @author Atanas Yordanov Arshinkov
  * @since 1.0.0
@@ -46,8 +47,8 @@ public class Randomy {
   }
 
   /**
-   * Takes length as a parameter and returns a random string with the english
-   * alphabet. If this method is used it will return a string with no digits in it.
+   * Takes length as a parameter and returns a random string with the english alphabet. If this method is used it will
+   * return a string with no digits in it.
    *
    * @param length the length of the string as characters
    *
@@ -66,10 +67,9 @@ public class Randomy {
   }
 
   /**
-   * Takes length as a parameter and returns a random string with the english
-   * alphabet
+   * Takes length as a parameter and returns a random string with the english alphabet
    *
-   * @param length        the length of the string as characters
+   * @param length the length of the string as characters
    * @param includeDigits if is true it will include digits in the string
    *
    * @return the randomly generated string
@@ -87,12 +87,11 @@ public class Randomy {
   }
 
   /**
-   * Takes length as a parameter and returns a random string with the english
-   * alphabet
+   * Takes length as a parameter and returns a random string with the english alphabet
    *
-   * @param length           the length of the string as characters
-   * @param includeDigits    if is true it will include digits in the string
-   * @param includeCapital   marks if the generated string should include capital letters
+   * @param length the length of the string as characters
+   * @param includeDigits if is true it will include digits in the string
+   * @param includeCapital marks if the generated string should include capital letters
    * @param includeLowercase marks if the generated string should include lowercase letters
    *
    * @return the randomly generated string
@@ -190,10 +189,40 @@ public class Randomy {
   }
 
   /**
-   * Generates a random number between the start and end parameter. The selection is inclusive - the result could be either of that numbers.
+   * Generates a random number between the start and end parameter. The selection is inclusive - the result could be
+   * either of that numbers.
+   *
+   * @param digitsCount the count of digits
+   *
+   * @return the generated whole number
+   */
+  public String generateRandomNumber(Integer digitsCount) {
+
+    if (digitsCount <= 0) {
+      throw new IllegalArgumentException("The number of digits cannot be 0 (zero) or negative");
+    }
+
+    StringBuilder builder = new StringBuilder();
+
+    for (int i = 0; i < digitsCount; i++) {
+      char generatedDigit = DIGITS.charAt(RANDOM.nextInt(DIGITS.length()));
+      if (i == 0) {
+        while (generatedDigit == '0') {
+          generatedDigit = DIGITS.charAt(RANDOM.nextInt(DIGITS.length()));
+        }
+      }
+      builder.append(generatedDigit);
+    }
+
+    return String.valueOf(builder);
+  }
+
+  /**
+   * Generates a random number between the start and end parameter. The selection is inclusive - the result could be
+   * either of that numbers.
    *
    * @param start the start number, the result must not be lower than that
-   * @param end   the end number, the result must not be greater than that
+   * @param end the end number, the result must not be greater than that
    *
    * @return the generated whole number
    */
@@ -219,10 +248,10 @@ public class Randomy {
   }
 
   // Private methods
-
   /**
-   * @param sequence    the sequence to be checked
-   * @param isUppercase marks if the sequence should contain only uppercase (if it is true) or only lowercase (if it is false)
+   * @param sequence the sequence to be checked
+   * @param isUppercase marks if the sequence should contain only uppercase (if it is true) or only lowercase (if it is
+   * false)
    *
    * @return true - if the sequence contains only one type of case (upper or lower)
    *

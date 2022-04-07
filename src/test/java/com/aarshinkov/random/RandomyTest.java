@@ -168,7 +168,6 @@ public class RandomyTest {
   }
 
   //----------------------------------------------------
-
   @DisplayName("Has only lowercase letters, sequence null")
   @Test
   void hasOnlyLowercaseLettersSequenceNull() {
@@ -219,7 +218,6 @@ public class RandomyTest {
   }
 
   //----------------------------------------------------
-
   @DisplayName("Has only uppercase letters, sequence null")
   @Test
   void hasOnlyUppercaseLettersSequenceNull() {
@@ -359,7 +357,6 @@ public class RandomyTest {
   }
 
   // Generate number end exclusive
-
   @DisplayName("Generate number, end exclusive")
   @RepeatedTest(20)
   @Test
@@ -423,6 +420,42 @@ public class RandomyTest {
 
     IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
       randomy.generateRandomNumber(21, 20, false);
+    });
+  }
+
+  @DisplayName("Generate number with specific digits")
+  @RepeatedTest(20)
+  @Test
+  void generateRandomNumberWithSpecificDigits() {
+
+    Integer digits = 10;
+
+    String result = randomy.generateRandomNumber(digits);
+
+    assertThat(result).isNotNull();
+    assertThat(result).hasSize(digits);
+    assertThat(result.charAt(0)).isNotEqualTo('0');
+  }
+
+  @DisplayName("Generate number with zero digits, throw illegal argument exception")
+  @Test
+  void generateRandomNumberWithZeroDigitsThrowIllegalArgumentException() {
+
+    Integer digits = 0;
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(digits);
+    });
+  }
+  
+  @DisplayName("Generate number with negative digits, throw illegal argument exception")
+  @Test
+  void generateRandomNumberWithNegativeDigitsThrowIllegalArgumentException() {
+
+    Integer digits = -52;
+
+    IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> {
+      randomy.generateRandomNumber(digits);
     });
   }
 }
